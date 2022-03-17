@@ -27,10 +27,17 @@ section {
 }
 
 .camView {
-  position: relative;
-  float: left;
+  /* position: relative;
+  float: center;
   width: calc(100% - 20px);
   margin: 10px;
+  cursor: pointer; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
   cursor: pointer;
 }
 
