@@ -9,7 +9,7 @@ function getUserMediaSupported() {
 // If webcam supported, add event listener to button for when user
 // wants to activate it to call enableCam function which we will
 // define in the next step.
-object.onload = func() {
+function enableCamera() {
   if (getUserMediaSupported()) {
     if (!model) {
       return;
@@ -26,6 +26,7 @@ object.onload = func() {
     console.warn('getUserMedia() is not supported by your browser');
   }
 };
+window.onload = enableCamera();
 if (getUserMediaSupported()) {
   if (!model) {
     return;
