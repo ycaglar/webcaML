@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
+    <title>Multiple object detection using pre trained model in TensorFlow.js</title>
     <meta charset="utf-8">
-    <title>webcaML</title>
+    <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <!-- <section id="demos" class="invisible"> -->
-      <section id="liveView" class="camView">
-        <video id="webcam" autoplay muted></video>
-      </section>
-    <!-- </section> -->
-  </body>
-  <footer>
+    <h1></h1>
+
+    <p></p>
+
+    <section id="demos" class="invisible">
+
+      <p></p>
+
+      <div id="liveView" class="camView">
+        <!-- <button id="webcamButton">Enable Webcam</button> -->
+        <video id="webcam" autoplay muted width="640" height="480"></video>
+      </div>
+    </section>
+
     <!-- Import TensorFlow.js library -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js" type="text/javascript"></script>
     <!-- Load the coco-ssd model to use to recognize things in images -->
@@ -20,5 +28,5 @@
 
     <!-- Import the page's JavaScript to do some stuff -->
     <script src="script.js" defer></script>
-  </footer>
+  </body>
 </html>
