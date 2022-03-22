@@ -1,7 +1,6 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
 const demosSection = document.getElementById('demos');
-const enableWebcamButton = document.getElementById('webcamButton');
 // Check if webcam access is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -19,32 +18,6 @@ if (getUserMediaSupported() && !model) {
     video.addEventListener('loadeddata', predictWebcam);
   });
 }
-// if (getUserMediaSupported()) {
-//   //window.addEventListener('load', enableCam);
-//   //enableWebcamButton.addEventListener('click', enableCam);
-//   enableCam();
-// } else {
-//   console.warn('getUserMedia() is not supported by your browser');
-// }
-// Enable the live webcam view and start classification.
-// function enableCam() {
-//   // Only continue if the COCO-SSD has finished loading.
-//   if (!model) {
-//     return;
-//   }
-//   // Hide the button once clicked.
-//   event.target.classList.add('removed');
-//   // getUsermedia parameters to force video but not audio.
-//   const constraints = {
-//     video: true
-//   };
-//   // Activate the webcam stream.
-//   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-//     window.alert('navigator.mediaDevices.getUserMedia(constraints).then(function(stream)');
-//     video.srcObject = stream;
-//     video.addEventListener('loadeddata', predictWebcam);
-//   });
-// }
 // Store the resulting model in the global scope of our app.
 var model = undefined;
 // Before we can use COCO-SSD class we must wait for it to finish
@@ -70,14 +43,22 @@ function predictWebcam() {
     // Now lets loop through predictions and draw them to the live view if
     // they have a high confidence score.
     for (let n = 0; n < predictions.length; n++) {
-      // If we are over 66% sure we are sure we classified it right, draw it!
-      if (predictions[n].score > 0.66) {
+      // If we are over 75% sure we are sure we classified it right, draw it!
+      if (predictions[n].score > 0.75) {
         const p = document.createElement('p');
-        p.innerText = predictions[n].class + ' - with ' + Math.round(parseFloat(predictions[n].score) * 100) + '% confidence.';
-        p.style = 'margin-left: ' + predictions[n].bbox[0] + 'px; margin-top: ' + (predictions[n].bbox[1] - 10) + 'px; width: ' + (predictions[n].bbox[2] - 10) + 'px; top: 0; left: 0;';
+        const predictionConfidence = Math.round(parseFloat(predictions[n].score) * 100);
+        p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
+        p.style = 'margin-left: ' + predictions[n].bbox[0] + 'px;\
+                   margin-top: ' + (predictions[n].bbox[1] - 10) + 'px;\
+                   width: ' + (predictions[n].bbox[2] - 10) + 'px;\
+                   top: 0;\
+                   left: 0;';
         const highlighter = document.createElement('div');
         highlighter.setAttribute('class', 'highlighter');
-        highlighter.style = 'left: ' + predictions[n].bbox[0] + 'px; top: ' + predictions[n].bbox[1] + 'px; width: ' + predictions[n].bbox[2] + 'px; height: ' + predictions[n].bbox[3] + 'px;';
+        highlighter.style = 'left: ' + predictions[n].bbox[0] + 'px;\
+                             top: ' + predictions[n].bbox[1] + 'px;\
+                             width: ' + predictions[n].bbox[2] + 'px;\
+                             height: ' + predictions[n].bbox[3] + 'px;';
         liveView.appendChild(highlighter);
         liveView.appendChild(p);
         children.push(highlighter);
