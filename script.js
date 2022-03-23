@@ -46,16 +46,20 @@ function predictWebcam() {
       if (predictions[n].score > 0.75) {
         const p = document.createElement('p');
         const predictionConfidence = Math.round(parseFloat(predictions[n].score) * 100);
+        const offset = {
+          x: video.getBoundingClientRect().left,
+          y: video.getBoundingClientRect().top
+        };
         p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
-        p.style = 'margin-left: ' + predictions[n].bbox[0] + 'px;\
-                   margin-top: ' + (predictions[n].bbox[1] - 10) + 'px;\
+        p.style = 'margin-left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
+                   margin-top: ' + (predictions[n].bbox[1] - 10 + offset.y) + 'px;\
                    width: ' + (predictions[n].bbox[2] - 10) + 'px;\
                    top: 0;\
                    left: 0;';
         const highlighter = document.createElement('div');
         highlighter.setAttribute('class', 'highlighter');
-        highlighter.style = 'left: ' + predictions[n].bbox[0] + 'px;\
-                             top: ' + predictions[n].bbox[1] + 'px;\
+        highlighter.style = 'left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
+                             top: ' + (predictions[n].bbox[1] + offset.y) + 'px;\
                              width: ' + predictions[n].bbox[2] + 'px;\
                              height: ' + predictions[n].bbox[3] + 'px;';
         liveView.appendChild(highlighter);
