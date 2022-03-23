@@ -1,12 +1,10 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
-const demosSection = document.getElementById('demos');
 // Check if webcam access is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 }
-// If webcam supported, add event listener to button for when user
-// wants to activate it to call enableCam function
+// If webcam supported, call enableCam function
 if (getUserMediaSupported() && !model) {
   const constraints = {
     video: true
@@ -20,10 +18,8 @@ if (getUserMediaSupported() && !model) {
 // Store the resulting model in the global scope of our app.
 var model = undefined;
 // Before we can use COCO-SSD class we must wait for it to finish
-// loading. Machine Learning models can be large and take a moment
-// to get everything needed to run.
-// Note: cocoSsd is an external object loaded from our index.html
-// script tag import.
+// loading.
+// cocoSsd is an external object loaded from our index.html script tag import.
 cocoSsd.load().then(function(loadedModel) {
   model = loadedModel;
   // Show demo section now model is ready to use.
