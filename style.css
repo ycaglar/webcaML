@@ -42,12 +42,15 @@ video {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   background-color: #fff;
-  
+  /* border-radius: %1.5; */
+  box-shadow: 0 8px 12px 1px rgba(29,17,51,.04),0 3px 16px 2px rgba(9,32,77,.12),0 5px 10px -3px rgba(29,17,51,.12);
+  /* margin: 16px; */
+  padding: 10px;
 }
 
-/* #webcam {
+#webcam {
   border-radius: 1.5%;
-} */
+}
 
 .camView p {
   /* display: flex;
