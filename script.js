@@ -6,8 +6,7 @@ function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 }
 // If webcam supported, add event listener to button for when user
-// wants to activate it to call enableCam function which we will
-// define in the next step.
+// wants to activate it to call enableCam function
 if (getUserMediaSupported() && !model) {
   const constraints = {
     video: true
@@ -24,11 +23,11 @@ var model = undefined;
 // loading. Machine Learning models can be large and take a moment
 // to get everything needed to run.
 // Note: cocoSsd is an external object loaded from our index.html
-// script tag import so ignore any warning in Glitch.
+// script tag import.
 cocoSsd.load().then(function(loadedModel) {
   model = loadedModel;
   // Show demo section now model is ready to use.
-  demosSection.classList.remove('invisible');
+  // demosSection.classList.remove('invisible');
 });
 var children = [];
 
