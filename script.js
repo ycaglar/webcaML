@@ -17,9 +17,8 @@ if (getUserMediaSupported() && !model) {
 }
 // Store the resulting model in the global scope of our app.
 var model = undefined;
-// Before we can use COCO-SSD class we must wait for it to finish
-// loading.
-// cocoSsd is an external object loaded from our index.html script tag import.
+// Before we can use COCO-SSD class we must wait for it to finish loading.
+// COCO-SSD is an external object loaded from our index.html script tag import.
 cocoSsd.load().then(function(loadedModel) {
   model = loadedModel;
   // Show demo section now model is ready to use.
