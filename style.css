@@ -2,6 +2,7 @@ body {
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
   color: #3D3D3D;
+  /* background-color: rgb(20, 20, 21); */
 }
 
 h1 {
@@ -71,4 +72,14 @@ video {
   background: rgba(0, 255, 0, 0.25);
   border: 1px dashed #fff;
   z-index: 1;
+}
+
+#loadingAnimation {
+    background: url('loading_animation.gif') no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999;
 }
