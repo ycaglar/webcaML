@@ -70,7 +70,8 @@ video {
   justify-content: center; */
   position: absolute;
   background: rgba(0, 255, 0, 0.25);
-  border: 1px dashed #fff;
+  border: 1px #fff;
+  /* border: 1px dashed #fff; */
   z-index: 1;
 }
 
