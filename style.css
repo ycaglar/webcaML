@@ -2,7 +2,6 @@ body {
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
   color: #3D3D3D;
-  /* background-color: rgb(20, 20, 21); */
 }
 
 h1 {
@@ -41,11 +40,9 @@ video {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   background-color: #fff;
-  /* border-radius: %1.5; */
-  box-shadow: 0 8px 12px 1px rgba(29,17,51,.04),
-              0 3px 16px 2px rgba(9,32,77,.12),
+  box-shadow: 0 8px 12px  1px rgba(29,17,51,.04),
+              0 3px 16px  2px rgba(9,32,77,.12),
               0 5px 10px -3px rgba(29,17,51,.12);
-  /* margin: 16px; */
   padding: 10px;
 }
 
@@ -54,34 +51,16 @@ video {
 }
 
 .camView p {
-  /* display: flex;
-  justify-content: center; */
   position: absolute;
   padding: 5px;
   background-color: rgba(255, 111, 0, 0.85);
   color: #FFF;
-  /* border: 1px dashed rgba(255, 255, 255, 0.7); */
   border: 1px rgba(255, 255, 255, 0.7);
-  z-index: 2;
   font-size: 12px;
 }
 
 .highlighter {
-  /* display: flex;
-  justify-content: center; */
   position: absolute;
   background: rgba(0, 255, 0, 0.25);
   border: 1px #fff;
-  /* border: 1px dashed #fff; */
-  z-index: 1;
-}
-
-#loadingAnimation {
-    background: url('loading_animation.gif') no-repeat center center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 9999999;
 }

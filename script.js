@@ -1,6 +1,5 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
-const loadingAnimation = document.getElementById('loadingAnimation');
 // Check if webcam access is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
