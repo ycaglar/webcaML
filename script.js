@@ -49,7 +49,8 @@ function predictWebcam() {
         const prediction = {
           x: Math.abs(predictions[n].bbox[0] - video.offsetWidth) + predictions[n].bbox[2],
           y: predictions[n].bbox[1],
-          w: predictions[n].bbox[2]
+          w: predictions[n].bbox[2],
+          h: predictions[n].bbox[3]
         };
         p.innerText = 'x: ' + prediction.x + ' y: ' + prediction.y;
         // p.innerText = 'video width: ' + video.offsetWidth;
@@ -65,10 +66,14 @@ function predictWebcam() {
         //            left: 0;';
         const highlighter = document.createElement('div');
         highlighter.setAttribute('class', 'highlighter');
-        highlighter.style = 'left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
-                             top: ' + (predictions[n].bbox[1] + offset.y) + 'px;\
-                             width: ' + predictions[n].bbox[2] + 'px;\
-                             height: ' + predictions[n].bbox[3] + 'px;';
+        highlighter.style = 'left: ' + (prediction.x + offset.x) + 'px;\
+                             top: ' + (prediction.y + offset.y) + 'px;\
+                             width: ' + predictions.w + 'px;\
+                             height: ' + prediction.h + 'px;';
+        // highlighter.style = 'left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
+        //                      top: ' + (predictions[n].bbox[1] + offset.y) + 'px;\
+        //                      width: ' + predictions[n].bbox[2] + 'px;\
+        //                      height: ' + predictions[n].bbox[3] + 'px;';
         liveView.appendChild(highlighter);
         liveView.appendChild(p);
         children.push(highlighter);
