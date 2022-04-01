@@ -45,12 +45,24 @@ function predictWebcam() {
           x: video.getBoundingClientRect().left,
           y: video.getBoundingClientRect().top
         };
-        p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
-        p.style = 'margin-left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
-                   margin-top: ' + (predictions[n].bbox[1] - 10 + offset.y) + 'px;\
-                   width: ' + (predictions[n].bbox[2] - 10) + 'px;\
+        // p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
+        const prediction = {
+          x: Math.abs(predictions[n].bbox[0] - video.offsetWidth) + predictions[n].bbox[2],
+          y: predictions[n].bbox[1],
+          w: predictions[n].bbox[2]
+        };
+        p.innerText = 'x: ' + prediction.x + ' y: ' + prediction.y;
+        // p.innerText = 'video width: ' + video.offsetWidth;
+        p.style = 'margin-left: ' + (prediction.x) + 'px;\
+                   margin-top: ' + (prediction.y - 10 + offset.y) + 'px;\
+                   width: ' + (prediction.w - 10) + 'px;\
                    top: 0;\
                    left: 0;';
+        // p.style = 'margin-left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
+        //            margin-top: ' + (predictions[n].bbox[1] - 10 + offset.y) + 'px;\
+        //            width: ' + (predictions[n].bbox[2] - 10) + 'px;\
+        //            top: 0;\
+        //            left: 0;';
         const highlighter = document.createElement('div');
         highlighter.setAttribute('class', 'highlighter');
         highlighter.style = 'left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\

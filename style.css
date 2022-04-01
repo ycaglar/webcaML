@@ -64,3 +64,10 @@ video {
   background: rgba(0, 255, 0, 0.25);
   border: 1px #fff;
 }
+
+.img-hor-vert {
+    -moz-transform: scale(-1, -1);
+    -o-transform: scale(-1, -1);
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+}
