@@ -54,9 +54,9 @@ function predictWebcam() {
         };
         p.innerText = 'x: ' + prediction.x + ' y: ' + prediction.y;
         // p.innerText = 'video width: ' + video.offsetWidth;
-        p.style = 'margin-left: ' + (prediction.x) + 'px;\
-                   margin-top: ' + (prediction.y - 10 + offset.y) + 'px;\
-                   width: ' + (prediction.w - 10) + 'px;\
+        p.style = 'margin-left: ' + prediction.x + 'px;\
+                   margin-top: ' + prediction.y + 'px;\
+                   width: ' + prediction.w + 'px;\
                    top: 0;\
                    left: 0;';
         // p.style = 'margin-left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
@@ -66,8 +66,8 @@ function predictWebcam() {
         //            left: 0;';
         const highlighter = document.createElement('div');
         highlighter.setAttribute('class', 'highlighter');
-        highlighter.style = 'left: ' + (prediction.x + offset.x) + 'px;\
-                             top: ' + (prediction.y + offset.y) + 'px;\
+        highlighter.style = 'left: ' + prediction.x + 'px;\
+                             top: ' + prediction.y + 'px;\
                              width: ' + predictions.w + 'px;\
                              height: ' + prediction.h + 'px;';
         // highlighter.style = 'left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
