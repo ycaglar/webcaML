@@ -52,7 +52,7 @@ function predictWebcam() {
           w: predictions[n].bbox[2],
           h: predictions[n].bbox[3]
         };
-        p.innerText = 'x: ' + prediction.x + ' y: ' + prediction.y + 'class: ' + predictions[n].class;
+        p.innerText = 'x: ' + prediction.x + ' y: ' + prediction.y;
         // p.innerText = 'video width: ' + video.offsetWidth;
         p.style = 'margin-left: ' + prediction.x + 'px;\
                    margin-top: ' + prediction.y + 'px;\
