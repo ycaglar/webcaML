@@ -1,8 +1,20 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
-let xy = document.querySelector('.xyView');
+let mouseView = {
+  x: document.querySelector('#mouse-x'),
+  y: document.querySelector('#mouse-y')
+}
+let webcamView = {
+  x: document.querySelector('#webcam-x'),
+  y: document.querySelector('#webcam-y')
+};
+let predictionView = {
+  x: document.querySelector('#prediction-x'),
+  y: document.querySelector('#prediction-y')
+};
 document.body.addEventListener('mousemove', (event) => {
-  xy.innerHTML = 'x: ' + event.x + " y: " + event.y;
+  mouseView.x.innerHTML = event.x;
+  mouseView.y.innerHTML = event.y;
 });
 // Check whether webcam is supported.
 function getUserMediaSupported() {
@@ -46,8 +58,8 @@ function predictWebcam() {
         const p = document.createElement('p');
         // p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
         const prediction = {
-          x: Math.abs(predictions[n].bbox[0] - video.offsetWidth) + predictions[n].bbox[2],
-          y: predictions[n].bbox[1],
+          x: predictions[n].bbox[0] + video.getBoundingClientRect().left,
+          y: predictions[n].bbox[1] + video.getBoundingClientRect().top,
           w: predictions[n].bbox[2],
           h: predictions[n].bbox[3],
           offset: {
@@ -58,8 +70,8 @@ function predictWebcam() {
           confidence: Math.round(parseFloat(predictions[n].score) * 100)
         };
         p.innerText = '%' + prediction.confidence + ' ' + prediction.class;
-        p.style = 'margin-left: ' + (prediction.x - prediction.offset.x) + 'px;\
-                   margin-top: ' + (prediction.y - prediction.offset.y) + 'px;\
+        p.style = 'margin-left: ' + prediction.x + 'px;\
+                   margin-top: ' + prediction.y + 'px;\
                    width: ' + prediction.w + 'px;\
                    top: 0;\
                    left: 0;';
@@ -69,6 +81,10 @@ function predictWebcam() {
                              top: ' + prediction.y + 'px;\
                              width: ' + predictions.w + 'px;\
                              height: ' + prediction.h + 'px;';
+        webcamView.x.innerHTML = prediction.offset.x;
+        webcamView.y.innerHTML = prediction.offset.y;
+        predictionView.x.innerHTML = Math.round(prediction.x);
+        predictionView.y.innerHTML = Math.round(prediction.y);
         liveView.appendChild(highlighter);
         liveView.appendChild(p);
         children.push(highlighter);

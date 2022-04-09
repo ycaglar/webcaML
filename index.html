@@ -9,7 +9,6 @@
     <div id="liveView" class="camView">
       <video id="webcam" autoplay muted width="640" height="480"></video>
     </div>
-    <p class="xyView"></p>
 
     <table>
       <thead>
@@ -27,7 +26,19 @@
       </thead>
       <tbody>
         <tr>
-
+          <td>mouse</td>
+          <td id = "mouse-x"></td>
+          <td id = "mouse-y"></td>
+        </tr>
+        <tr>
+          <td>webcam</td>
+          <td id = "webcam-x"></td>
+          <td id = "webcam-y"></td>
+        </tr>
+        <tr>
+          <td>prediction</td>
+          <td id = "prediction-x"></td>
+          <td id = "prediction-y"></td>
         </tr>
       </tbody>
     </table>
