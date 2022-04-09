@@ -40,24 +40,20 @@ function predictWebcam() {
       // If we are over 75% sure we are sure we classified it right, draw it!
       if (predictions[n].score > 0.75) {
         const p = document.createElement('p');
-        const predictionConfidence = Math.round(parseFloat(predictions[n].score) * 100);
-        const offset = {
-          x: video.getBoundingClientRect().left,
-          y: video.getBoundingClientRect().top
-        };
         // p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
         const prediction = {
           x: Math.abs(predictions[n].bbox[0] - video.offsetWidth) + predictions[n].bbox[2],
           y: predictions[n].bbox[1],
           w: predictions[n].bbox[2],
           h: predictions[n].bbox[3],
-          const offset = {
+          offset: {
             x: video.getBoundingClientRect().left,
             y: video.getBoundingClientRect().top
-          }
+          },
+          class: predictions[n].class,
+          confidence: Math.round(parseFloat(predictions[n].score) * 100)
         };
-        p.innerText = 'x: ' + prediction.x + ' y: ' + prediction.y;
-        // p.innerText = 'video width: ' + video.offsetWidth;
+        p.innerText = '%' + prediction.confidence + ' ' + prediction.class;
         p.style = 'margin-left: ' + prediction.x + 'px;\
                    margin-top: ' + prediction.y + 'px;\
                    width: ' + prediction.w + 'px;\
