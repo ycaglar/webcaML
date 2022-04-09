@@ -1,5 +1,9 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
+let xy = document.querySelector('.xyView');
+document.body.addEventListener('mousemove', (event) => {
+  xy.innerHTML = 'x: ' + event.x + " y: " + event.y;
+});
 // Check whether webcam is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -54,8 +58,8 @@ function predictWebcam() {
           confidence: Math.round(parseFloat(predictions[n].score) * 100)
         };
         p.innerText = '%' + prediction.confidence + ' ' + prediction.class;
-        p.style = 'margin-left: ' + prediction.x + 'px;\
-                   margin-top: ' + prediction.y + 'px;\
+        p.style = 'margin-left: ' + (prediction.x - prediction.offset.x) + 'px;\
+                   margin-top: ' + (prediction.y - prediction.offset.y) + 'px;\
                    width: ' + prediction.w + 'px;\
                    top: 0;\
                    left: 0;';
