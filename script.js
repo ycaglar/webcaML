@@ -1,6 +1,6 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
-// Check if webcam access is supported.
+// Check whether webcam is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 }
@@ -9,7 +9,7 @@ if (getUserMediaSupported() && !model) {
   const constraints = {
     video: true
   };
-  // Activate the webcam stream.
+  // Activate the webcam video stream.
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     video.srcObject = stream;
     video.addEventListener('loadeddata', predictWebcam);
@@ -50,7 +50,11 @@ function predictWebcam() {
           x: Math.abs(predictions[n].bbox[0] - video.offsetWidth) + predictions[n].bbox[2],
           y: predictions[n].bbox[1],
           w: predictions[n].bbox[2],
-          h: predictions[n].bbox[3]
+          h: predictions[n].bbox[3],
+          const offset = {
+            x: video.getBoundingClientRect().left,
+            y: video.getBoundingClientRect().top
+          }
         };
         p.innerText = 'x: ' + prediction.x + ' y: ' + prediction.y;
         // p.innerText = 'video width: ' + video.offsetWidth;
@@ -59,21 +63,12 @@ function predictWebcam() {
                    width: ' + prediction.w + 'px;\
                    top: 0;\
                    left: 0;';
-        // p.style = 'margin-left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
-        //            margin-top: ' + (predictions[n].bbox[1] - 10 + offset.y) + 'px;\
-        //            width: ' + (predictions[n].bbox[2] - 10) + 'px;\
-        //            top: 0;\
-        //            left: 0;';
         const highlighter = document.createElement('div');
         highlighter.setAttribute('class', 'highlighter');
         highlighter.style = 'left: ' + prediction.x + 'px;\
                              top: ' + prediction.y + 'px;\
                              width: ' + predictions.w + 'px;\
                              height: ' + prediction.h + 'px;';
-        // highlighter.style = 'left: ' + (predictions[n].bbox[0] + offset.x) + 'px;\
-        //                      top: ' + (predictions[n].bbox[1] + offset.y) + 'px;\
-        //                      width: ' + predictions[n].bbox[2] + 'px;\
-        //                      height: ' + predictions[n].bbox[3] + 'px;';
         liveView.appendChild(highlighter);
         liveView.appendChild(p);
         children.push(highlighter);
