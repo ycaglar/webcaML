@@ -1,5 +1,7 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
+document.querySelector('#window-width').innerText = window.innerWidth;
+document.querySelector('#window-height').innerText = window.innerHeight;
 let mouseView = {
   x: document.querySelector('#mouse-x'),
   y: document.querySelector('#mouse-y')
@@ -58,8 +60,8 @@ function predictWebcam() {
         const p = document.createElement('p');
         // p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
         const prediction = {
-          x: predictions[n].bbox[0] + video.getBoundingClientRect().left,
-          y: predictions[n].bbox[1] + video.getBoundingClientRect().top,
+          x: window.innerWidth - predictions[n].bbox[0],
+          y: predictions[n].bbox[1],
           w: predictions[n].bbox[2],
           h: predictions[n].bbox[3],
           offset: {
