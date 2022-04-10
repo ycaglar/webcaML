@@ -85,12 +85,14 @@ function predictWebcam() {
         highlighter.setAttribute('class', 'highlighter');
         highlighter.style = 'left: ' + prediction.x + 'px;\
                              top: ' + prediction.y + 'px;\
-                             width: ' + predictions.w + 'px;\
+                             width: ' + prediction.w + 'px;\
                              height: ' + prediction.h + 'px;';
+        // TABLE START
         webcamView.x.innerHTML = prediction.offset.x;
         webcamView.y.innerHTML = prediction.offset.y;
         predictionView.x.innerHTML = Math.round(prediction.x);
         predictionView.y.innerHTML = Math.round(prediction.y);
+        // TABLE END
         liveView.appendChild(highlighter);
         liveView.appendChild(p);
         children.push(highlighter);

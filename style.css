@@ -65,13 +65,6 @@ video {
   border: 1px #fff;
 }
 
-.img-hor-vert {
-    -moz-transform: scale(-1, -1);
-    -o-transform: scale(-1, -1);
-    -webkit-transform: scale(-1, -1);
-    transform: scale(-1, -1);
-}
-
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
