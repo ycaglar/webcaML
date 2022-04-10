@@ -1,7 +1,10 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
+// TABLE START
 document.querySelector('#window-width').innerText = window.innerWidth;
 document.querySelector('#window-height').innerText = window.innerHeight;
+document.querySelector('#page-width').innerText = document.documentElement.scrollWidth;
+document.querySelector('#page-height').innerText = document.documentElement.scrollHeight;
 let mouseView = {
   x: document.querySelector('#mouse-x'),
   y: document.querySelector('#mouse-y')
@@ -18,6 +21,7 @@ document.body.addEventListener('mousemove', (event) => {
   mouseView.x.innerHTML = event.x;
   mouseView.y.innerHTML = event.y;
 });
+// TABLE END
 // Check whether webcam is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -60,13 +64,13 @@ function predictWebcam() {
         const p = document.createElement('p');
         // p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
         const prediction = {
-          x: window.innerWidth - predictions[n].bbox[0],
+          x: window.innerWidth - predictions[n].bbox[0] - video.getBoundingClientRect().x - predictions[n].bbox[2] - 50,
           y: predictions[n].bbox[1],
           w: predictions[n].bbox[2],
           h: predictions[n].bbox[3],
           offset: {
-            x: video.getBoundingClientRect().left,
-            y: video.getBoundingClientRect().top
+            x: video.getBoundingClientRect().x,
+            y: video.getBoundingClientRect().y
           },
           class: predictions[n].class,
           confidence: Math.round(parseFloat(predictions[n].score) * 100)
