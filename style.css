@@ -43,7 +43,7 @@ video {
   font-size: 12px;
 }
 
-.highlighter {
+.boundingBox {
   position: absolute;
   background: rgba(0, 255, 0, 0.25);
   border: 1px #fff;

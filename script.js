@@ -22,7 +22,6 @@ var model = undefined;
 cocoSsd.load().then(function(loadedModel) {
   model = loadedModel;
   // Show demo section now model is ready to use.
-  // demosSection.classList.remove('invisible');
 });
 var children = [];
 
@@ -40,7 +39,6 @@ function predictWebcam() {
       // If we are over 75% sure we are sure we classified it right, draw it!
       if (predictions[n].score > 0.75) {
         const boundingBoxLabel = document.createElement('p');
-        // p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
         const prediction = {
           x: window.innerWidth - predictions[n].bbox[0] - videoFeed.getBoundingClientRect().x - predictions[n].bbox[2] - 50,
           y: predictions[n].bbox[1],
@@ -60,7 +58,7 @@ function predictWebcam() {
                                   top: 0;\
                                   left: 0;';
         const boundingBox = document.createElement('div');
-        boundingBox.setAttribute('class', 'highlighter');
+        boundingBox.setAttribute('class', 'boundingBox');
         boundingBox.style = 'left: ' + prediction.x + 'px;\
                              top: ' + prediction.y + 'px;\
                              width: ' + prediction.w + 'px;\
