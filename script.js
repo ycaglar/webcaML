@@ -1,5 +1,5 @@
-const videoFeed = document.getElementById('video-feed');
-const videoFrame = document.getElementById('video-frame');
+const videoFeed = document.getElementById('videoFeed');
+const videoFrame = document.getElementById('videoFrame');
 // Check whether webcam is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
