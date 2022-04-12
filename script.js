@@ -1,27 +1,5 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
-// TABLE START
-// document.querySelector('#window-width').innerText = window.innerWidth;
-// document.querySelector('#window-height').innerText = window.innerHeight;
-// document.querySelector('#page-width').innerText = document.documentElement.scrollWidth;
-// document.querySelector('#page-height').innerText = document.documentElement.scrollHeight;
-// let mouseView = {
-//   x: document.querySelector('#mouse-x'),
-//   y: document.querySelector('#mouse-y')
-// }
-// let webcamView = {
-//   x: document.querySelector('#webcam-x'),
-//   y: document.querySelector('#webcam-y')
-// };
-// let predictionView = {
-//   x: document.querySelector('#prediction-x'),
-//   y: document.querySelector('#prediction-y')
-// };
-// document.body.addEventListener('mousemove', (event) => {
-//   mouseView.x.innerHTML = event.x;
-//   mouseView.y.innerHTML = event.y;
-// });
-// TABLE END
 // Check whether webcam is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -31,7 +9,7 @@ if (getUserMediaSupported() && !model) {
   const constraints = {
     video: true
   };
-  // Activate the webcam video stream.
+  //Activate the webcam video stream.
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     video.srcObject = stream;
     video.addEventListener('loadeddata', predictWebcam);
@@ -87,12 +65,6 @@ function predictWebcam() {
                              top: ' + prediction.y + 'px;\
                              width: ' + prediction.w + 'px;\
                              height: ' + prediction.h + 'px;';
-        // TABLE START
-        // webcamView.x.innerHTML = prediction.offset.x;
-        // webcamView.y.innerHTML = prediction.offset.y;
-        // predictionView.x.innerHTML = Math.round(prediction.x);
-        // predictionView.y.innerHTML = Math.round(prediction.y);
-        // TABLE END
         liveView.appendChild(highlighter);
         liveView.appendChild(p);
         children.push(highlighter);
