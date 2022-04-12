@@ -26,7 +26,7 @@ section {
   opacity: 0.2;
 }
 
-.camView {
+#video-frame {
   display: flex;
   justify-content: center;
   position: relative;
@@ -46,11 +46,11 @@ video {
   padding: 10px;
 }
 
-#webcam {
+#video-feed {
   border-radius: 1.5%;
 }
 
-.camView p {
+#video-frame p {
   position: absolute;
   padding: 5px 0px 5px 0px;
   background-color: rgba(255, 111, 0, 0.85);

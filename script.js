@@ -1,5 +1,5 @@
-const video = document.getElementById('webcam');
-const liveView = document.getElementById('liveView');
+const videoFeed = document.getElementById('video-feed');
+const videoFrame = document.getElementById('video-frame');
 // Check whether webcam is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -11,8 +11,8 @@ if (getUserMediaSupported() && !model) {
   };
   //Activate the webcam video stream.
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-    video.srcObject = stream;
-    video.addEventListener('loadeddata', predictWebcam);
+    videoFeed.srcObject = stream;
+    videoFeed.addEventListener('loadeddata', predictWebcam);
   });
 }
 // Store the resulting model in the global scope of our app.
@@ -28,10 +28,10 @@ var children = [];
 
 function predictWebcam() {
   // Now let's start classifying a frame in the stream.
-  model.detect(video).then(function(predictions) {
+  model.detect(videoFeed).then(function(predictions) {
     // Remove any highlighting we did previous frame.
     for (let i = 0; i < children.length; i++) {
-      liveView.removeChild(children[i]);
+      videoFrame.removeChild(children[i]);
     }
     children.splice(0);
     // Now lets loop through predictions and draw them to the live view if
@@ -42,13 +42,13 @@ function predictWebcam() {
         const p = document.createElement('p');
         // p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
         const prediction = {
-          x: window.innerWidth - predictions[n].bbox[0] - video.getBoundingClientRect().x - predictions[n].bbox[2] - 50,
+          x: window.innerWidth - predictions[n].bbox[0] - videoFeed.getBoundingClientRect().x - predictions[n].bbox[2] - 50,
           y: predictions[n].bbox[1],
           w: predictions[n].bbox[2],
           h: predictions[n].bbox[3],
           offset: {
-            x: video.getBoundingClientRect().x,
-            y: video.getBoundingClientRect().y
+            x: videoFeed.getBoundingClientRect().x,
+            y: videoFeed.getBoundingClientRect().y
           },
           class: predictions[n].class,
           confidence: Math.round(parseFloat(predictions[n].score) * 100)
@@ -65,8 +65,8 @@ function predictWebcam() {
                              top: ' + prediction.y + 'px;\
                              width: ' + prediction.w + 'px;\
                              height: ' + prediction.h + 'px;';
-        liveView.appendChild(highlighter);
-        liveView.appendChild(p);
+        videoFrame.appendChild(highlighter);
+        videoFrame.appendChild(p);
         children.push(highlighter);
         children.push(p);
       }
