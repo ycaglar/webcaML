@@ -39,7 +39,7 @@ function predictWebcam() {
     for (let n = 0; n < predictions.length; n++) {
       // If we are over 75% sure we are sure we classified it right, draw it!
       if (predictions[n].score > 0.75) {
-        const p = document.createElement('p');
+        const boundingBoxLabel = document.createElement('p');
         // p.innerText = predictions[n].class + ' - with ' + predictionConfidence + '% confidence.';
         const prediction = {
           x: window.innerWidth - predictions[n].bbox[0] - videoFeed.getBoundingClientRect().x - predictions[n].bbox[2] - 50,
@@ -53,22 +53,22 @@ function predictWebcam() {
           class: predictions[n].class,
           confidence: Math.round(parseFloat(predictions[n].score) * 100)
         };
-        p.innerText = '%' + prediction.confidence + ' ' + prediction.class;
-        p.style = 'margin-left: ' + prediction.x + 'px;\
-                   margin-top: ' + prediction.y + 'px;\
-                   width: ' + prediction.w + 'px;\
-                   top: 0;\
-                   left: 0;';
-        const highlighter = document.createElement('div');
-        highlighter.setAttribute('class', 'highlighter');
-        highlighter.style = 'left: ' + prediction.x + 'px;\
+        boundingBoxLabel.innerText = '%' + prediction.confidence + ' ' + prediction.class;
+        boundingBoxLabel.style = 'margin-left: ' + prediction.x + 'px;\
+                                  margin-top: ' + prediction.y + 'px;\
+                                  width: ' + prediction.w + 'px;\
+                                  top: 0;\
+                                  left: 0;';
+        const boundingBox = document.createElement('div');
+        boundingBox.setAttribute('class', 'highlighter');
+        boundingBox.style = 'left: ' + prediction.x + 'px;\
                              top: ' + prediction.y + 'px;\
                              width: ' + prediction.w + 'px;\
                              height: ' + prediction.h + 'px;';
-        videoFrame.appendChild(highlighter);
-        videoFrame.appendChild(p);
-        children.push(highlighter);
-        children.push(p);
+        videoFrame.appendChild(boundingBox);
+        videoFrame.appendChild(boundingBoxLabel);
+        children.push(boundingBox);
+        children.push(boundingBoxLabel);
       }
     }
     // Call this function again to keep predicting when the browser is ready.
