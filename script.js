@@ -33,8 +33,7 @@ function predictWebcam() {
       videoFrame.removeChild(children[i]);
     }
     children.splice(0);
-    // Now lets loop through predictions and draw them to the live view if
-    // they have a high confidence score.
+    // Loop through and draw predictions to the live view
     for (let n = 0; n < predictions.length; n++) {
       // If we are over 75% sure we are sure we classified it right, draw it!
       if (predictions[n].score > 0.75) {
