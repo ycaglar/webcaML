@@ -68,7 +68,7 @@ function predictWebcam() {
         children.push(boundingBoxLabel);
       }
     }
-    // Call this function again to keep predicting when the browser is ready.
+    //keep predicting when the browser is ready.
     window.requestAnimationFrame(predictWebcam);
   });
 }
