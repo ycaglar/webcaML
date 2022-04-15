@@ -12,21 +12,20 @@ if (getUserMediaSupported() && !model) {
   //Activate the webcam video stream.
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     videoFeed.srcObject = stream;
-    videoFeed.addEventListener('loadeddata', predictWebcam);
+    videoFeed.addEventListener('loadeddata', predictStream);
   });
 }
 // Store the resulting model in the global scope of our app.
 var model = undefined;
-// Before we can use COCO-SSD class we must wait for it to finish loading.
-// COCO-SSD is an external object loaded from our index.html script tag import.
+// Asynchronously call COCO-SSD
 cocoSsd.load().then(function(loadedModel) {
   model = loadedModel;
   // Show demo section now model is ready to use.
 });
 var children = [];
 
-function predictWebcam() {
-  // Now let's start classifying a frame in the stream.
+function predictStream() {
+  // Start classifying a frame in the stream.
   model.detect(videoFeed).then(function(predictions) {
     // Remove any highlighting we did previous frame.
     for (let i = 0; i < children.length; i++) {
@@ -35,7 +34,7 @@ function predictWebcam() {
     children.splice(0);
     // Loop through and draw predictions to the live view
     for (let n = 0; n < predictions.length; n++) {
-      // If we are over 75% sure we are sure we classified it right, draw it!
+      // Draw if the prediction score is higher than the set value
       if (predictions[n].score > 0.75) {
         const boundingBoxLabel = document.createElement('p');
         const prediction = {
@@ -69,6 +68,6 @@ function predictWebcam() {
       }
     }
     //keep predicting when the browser is ready.
-    window.requestAnimationFrame(predictWebcam);
+    window.requestAnimationFrame(predictStream);
   });
 }
