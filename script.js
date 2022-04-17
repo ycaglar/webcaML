@@ -23,6 +23,7 @@ cocoSsd.load().then(function(loadedModel) {
   // Show demo section now model is ready to use.
 });
 var children = [];
+const predictions = undefined;
 
 function predictStream() {
   // Start classifying a frame in the stream.
@@ -37,7 +38,7 @@ function predictStream() {
       // Draw if the prediction score is higher than the set value
       if (predictions[n].score > 0.75) {
         const boundingBoxLabel = document.createElement('p');
-        const prediction = {
+        prediction = {
           x: window.innerWidth - predictions[n].bbox[0] - videoFeed.getBoundingClientRect().x - predictions[n].bbox[2] - 50,
           y: predictions[n].bbox[1],
           w: predictions[n].bbox[2],
