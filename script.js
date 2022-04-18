@@ -4,7 +4,7 @@ const videoFrame = document.getElementById('videoFrame');
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 }
-// If webcam supported, call enableCam function
+// If webcam supported, enable the webcam stream
 if (getUserMediaSupported() && !model) {
   const constraints = {
     video: true
@@ -15,7 +15,7 @@ if (getUserMediaSupported() && !model) {
     videoFeed.addEventListener('loadeddata', predictStream);
   });
 }
-// Store the resulting model in the global scope of our app.
+// Store the resulting model in the global scope
 var model = undefined;
 // Asynchronously call COCO-SSD
 cocoSsd.load().then(function(loadedModel) {
@@ -28,7 +28,7 @@ const predictions = undefined;
 function predictStream() {
   // Start classifying a frame in the stream.
   model.detect(videoFeed).then(function(predictions) {
-    // Remove any highlighting we did previous frame.
+    // Remove previous highlightings
     for (let i = 0; i < children.length; i++) {
       videoFrame.removeChild(children[i]);
     }
