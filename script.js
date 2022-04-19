@@ -5,7 +5,8 @@ function getUserMediaSupported() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 }
 // If webcam supported, enable the webcam stream
-if (getUserMediaSupported() && !model) {
+//if (getUserMediaSupported() && !model) {
+if (getUserMediaSupported()) {
   const constraints = {
     video: true
   };
@@ -28,7 +29,7 @@ const predictions = undefined;
 function predictStream() {
   // Start classifying a frame in the stream.
   model.detect(videoFeed).then(function(predictions) {
-    // Remove previous highlightings
+    // Remove all previous highlightings
     for (let i = 0; i < children.length; i++) {
       videoFrame.removeChild(children[i]);
     }
@@ -68,7 +69,7 @@ function predictStream() {
         children.push(boundingBoxLabel);
       }
     }
-    //keep predicting when the browser is ready.
+    //keep predicting if the browser is ready.
     window.requestAnimationFrame(predictStream);
   });
 }
