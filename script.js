@@ -69,7 +69,7 @@ function predictStream() {
         children.push(boundingBoxLabel);
       }
     }
-    //keep predicting if the browser is ready.
+    //keep predicting
     window.requestAnimationFrame(predictStream);
   });
 }
