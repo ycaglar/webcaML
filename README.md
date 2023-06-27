@@ -4,8 +4,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
 ## Overview
-Welcome to webcaML, an AI powered webcam with object detection capabilities.
-It was built using the Common Objects in Context (COCO) dataset and the Single Shot MultiBox Detection model architecture. webcaML can detect 80 common objects, localize them with bounding box drawings, and also provide identification captions.
+webcaML is an AI-powered webcam equipped with advanced object detection capabilities. It utilizes the extensive Common Objects in Context (COCO) dataset and leverages the highly efficient Single Shot MultiBox Detection model architecture. With webcaML, you can effortlessly detect and localize 80 commonly encountered objects, complete with precise bounding box annotations and informative identification captions.
 
 <!-- ![Tux](/screenshots/screenshot_n.png)
 
